@@ -12,7 +12,7 @@ func binarySearch(array []int, value int)(presence bool, index int){
 	var start int = 0
 	var end int = len(array) - 1 
 	var midpoint int //= end/2 <== I had this initial assignment here, but it's not needed when we have our 
-					 //updating assignment at the top of the loop instead of at the bottom.
+			//updating assignment at the top of the loop instead of at the bottom.
 	
 	//It's important we are only checking when the start and end indices have move passed each other.
 	//If we just check when they are equal we might have the indices land on each other after one midpoint value
@@ -25,10 +25,10 @@ func binarySearch(array []int, value int)(presence bool, index int){
 			end = midpoint - 1
 		} else if array[midpoint] < value{ 
 			start = midpoint + 1	//Our start and end positions are always set just after or before the midpoint respectively.
-									//If we start and end next to each other, and neither one of them is our value we could get stuck
-									//in an infinite loop otherwise. Our midpoint would either be (start + 0) or (start + 1) which is
-									//start and end respectively. It won't move and the start or end will just be reset over and over.
-									//We need to let them keep moving so we can spot when they cross past each other. 
+						//If we start and end next to each other, and neither one of them is our value we could get stuck
+						//in an infinite loop otherwise. Our midpoint would either be (start + 0) or (start + 1) which is
+						//start and end respectively. It won't move and the start or end will just be reset over and over.
+						//We need to let them keep moving so we can spot when they cross past each other. 
 		}
 	}
 	return false, -1
