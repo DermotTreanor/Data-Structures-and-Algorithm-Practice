@@ -29,6 +29,7 @@ func bubble_sort(array []int){
 		entryBubblingUp = 0
 		entryToCompareTo = entryBubblingUp + 1
 		for entryToCompareTo <= unsortedLimit{
+			fmt.Print("Test|")
 			if array[entryBubblingUp] > array[entryToCompareTo]{
 				stillSorting = true
 				array[entryBubblingUp], array[entryToCompareTo] = array[entryToCompareTo], array[entryBubblingUp]
@@ -36,7 +37,8 @@ func bubble_sort(array []int){
 			entryBubblingUp += 1
 			entryToCompareTo += 1
 		}
-		fmt.Println("DURING: ", array)
+		unsortedLimit -= 1 //This is necessary to stop redundant checks of already sorted portions of the array
+		fmt.Println("\nDURING: ", array)
 
 	}
 }
