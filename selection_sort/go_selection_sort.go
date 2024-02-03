@@ -28,13 +28,16 @@ func selectionSort(array []int){
 	*/
 	var minimumItemIndex int = 0
 	var currentStart int = 0
-	for currentStart != len(array) - 1{
+	for currentStart < len(array) - 1{
+		minimumItemIndex = currentStart //This line is obviously necessary but I explain at the bottom what can go wrong without it
 		for i := currentStart; i < len(array); i++{
 			if array[i] < array[minimumItemIndex]{
 				minimumItemIndex = i
 			}
 		}
-		array[currentStart], array[minimumItemIndex] = array[minimumItemIndex], array[currentStart]
+		if minimumItemIndex != currentStart{
+			array[currentStart], array[minimumItemIndex] = array[minimumItemIndex], array[currentStart]
+		}
 		currentStart++
 	}
 }
@@ -45,3 +48,19 @@ func main(){
 	selectionSort(exampleArray)
 	fmt.Println(exampleArray)
 }
+
+
+
+/*
+Resetting the value that stores the index with the lowest value to be where we are currently starting our new main loop
+iteration is very important. If we don't do that: it's not a big issue if the minimum is already ahead of the currentStart.
+However, what if they are the same? As in, what if the minimum was where we started.
+Then, we will increment currentStart but leave the minimum index where it is. This means minimum won't change in the inner
+loop because it is part of the already sorted array (and therefore has a value lower than anything remaining).
+
+But since our code only checks that we swap currentStart and the minimum if they aren't the same index we will be swapping
+whatever happened to be the currentStart into minimum's place (the last minimum that we found will be placed at the new current).
+
+Minimum will still be stuck where it and currentStart diverged. It will only leave if there are values in the array that are lower
+than it so that it gets changed to that. 
+*/
