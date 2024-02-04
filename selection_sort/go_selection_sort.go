@@ -26,11 +26,12 @@ func selectionSort(array []int){
 	We end up placing the second lowest item there. This pattern is continued until are starting position is the last item
 	in the array.
 	*/
-	var minimumItemIndex int = 0
-	var currentStart int = 0
-	for currentStart < len(array) - 1{
+	var minimumItemIndex int 
+	for currentStart:= 0; currentStart < len(array) - 1; currentStart++{
 		minimumItemIndex = currentStart //This line is obviously necessary but I explain at the bottom what can go wrong without it
-		for i := currentStart; i < len(array); i++{
+
+		for i := currentStart + 1; i < len(array); i++{ //Note that i is set to currentStart PLUS ONE. This starts i one ahead of currentStart (where minimum is initially set to)
+														//This means we won't do an iteration just checking if the index minimum is already set to is less than itself.
 			if array[i] < array[minimumItemIndex]{
 				minimumItemIndex = i
 			}
@@ -38,7 +39,6 @@ func selectionSort(array []int){
 		if minimumItemIndex != currentStart{
 			array[currentStart], array[minimumItemIndex] = array[minimumItemIndex], array[currentStart]
 		}
-		currentStart++
 	}
 }
 
