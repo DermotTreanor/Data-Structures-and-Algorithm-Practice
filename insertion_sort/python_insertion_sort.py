@@ -8,6 +8,8 @@ def insertion_sort(array):
     return None
 
 def main():
+    print("Hello")
+    len("hell")
     return None
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ def selection_sort(array):
 def main():
     print("Here is the shuffled list: ", my_list)
     selection_sort(my_list)
-    print("Here is the bubble sorted list: ", my_list)
+    print("Here is the selection sorted list: ", my_list)
     return 
 
 if __name__ == "__main__":
