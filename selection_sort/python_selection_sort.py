@@ -12,8 +12,8 @@ def selection_sort(array):
                                         #Minimum will be guaranteed not to swap with anything on this iteration. But it won't be == to currentStart
                                         #so we will swap what's at minimum back into the pool of items to be sorted and take whatever currentStart is at
                                         #into our previously sorted pool. 
-        for i, v in enumerate(array[currentStart:]):
-            i += currentStart
+        for i, v in enumerate(array[currentStart + 1:]): #We start from currentStart PLUS ONE because minimumItemIndex is already set to currentStart. No point checking for a lower value at currentStart
+            i += currentStart + 1
             if v < array[minimumItemIndex]:
                 minimumItemIndex = i
         if minimumItemIndex != currentStart:
