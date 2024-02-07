@@ -20,28 +20,32 @@ func shuffle(array []int) (shuffledArray []int) {
 }
 
 func InsertionSort(array []int) {
-
-	var gapIndex int = 1
+	var currentStartIndex int = 1
 	var currentValue int
-	for gapIndex < len(array)-1 {
+	var gapIndex int
+
+	//We start at the second position and place the item into the correct, sorted spot with everything before it.
+	//As we move through the list, each index we get to will have everything to the 'left' of it sorted so we just need to
+	//find its own correct place.
+	for currentStartIndex < len(array) {
+		gapIndex = currentStartIndex
 		currentValue = array[gapIndex]
-		for i := gapIndex - 1; i >= 0; i-- {
-			if array[i] > array[gapIndex]{
-				array[gapIndex] = array[i]
-				gapIndex = i
+		for comparisonIndex := gapIndex - 1; comparisonIndex >= -1; comparisonIndex-- {
+			if comparisonIndex == -1{
+				array[gapIndex] = currentValue
+			}else if array[comparisonIndex] > currentValue{
+				array[gapIndex] = array[comparisonIndex]
+				gapIndex = comparisonIndex
 			}else{
 				array[gapIndex] = currentValue
 				break
 			}
 		}
-		gapIndex++
-
+		currentStartIndex++
 	}
-
 }
 
 func main() {
-	// fmt.Println("Here is the ordered array: ", exampleArray)
 	exampleArray = shuffle(exampleArray)
 	fmt.Println("Here is the shuffled array: ", exampleArray)
 	InsertionSort(exampleArray)
