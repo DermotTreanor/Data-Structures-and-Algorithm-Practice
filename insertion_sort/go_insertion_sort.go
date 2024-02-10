@@ -20,29 +20,67 @@ func shuffle(array []int) (shuffledArray []int) {
 }
 
 func InsertionSort(array []int) {
+	//We start at the second position and place the item into the correct, sorted spot with everything before it.
+	//As we move through the list, each index we get to will have everything to the 'left' of it sorted so we just need to
+	//find its own correct place
 	var currentStartIndex int = 1
 	var currentValue int
 	var gapIndex int
 
-	//We start at the second position and place the item into the correct, sorted spot with everything before it.
-	//As we move through the list, each index we get to will have everything to the 'left' of it sorted so we just need to
-	//find its own correct place.
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~This was the original attempt
+	// for currentStartIndex < len(array) {
+	// 	gapIndex = currentStartIndex
+	// 	currentValue = array[gapIndex]
+	// 	for comparisonIndex := gapIndex - 1; comparisonIndex >= -1; comparisonIndex-- {
+	// 		if comparisonIndex == -1 {
+	// 			array[gapIndex] = currentValue
+	// 		} else if array[comparisonIndex] > currentValue {
+	// 			array[gapIndex] = array[comparisonIndex]
+	// 			gapIndex = comparisonIndex
+	// 		} else {
+	// 			array[gapIndex] = currentValue
+	// 			break
+	// 		}
+	// 	}
+	// 	currentStartIndex++
+	// }
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Inbetween previous implementation and next implementation
+	// for currentStartIndex < len(array) {
+	// 	gapIndex = currentStartIndex
+	// 	currentValue = array[gapIndex]
+	// 	for comparisonIndex := gapIndex - 1; comparisonIndex >= 0; comparisonIndex-- {
+	// 		if array[comparisonIndex] > currentValue {
+	// 			array[gapIndex] = array[comparisonIndex]
+	// 			gapIndex = comparisonIndex
+	// 		} else {
+	// 			break
+	// 		}
+	// 	}
+	// 	array[gapIndex] = currentValue
+	// 	currentStartIndex++
+	// }
+
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Current, cleanest attempt
 	for currentStartIndex < len(array) {
 		gapIndex = currentStartIndex
 		currentValue = array[gapIndex]
-		for comparisonIndex := gapIndex - 1; comparisonIndex >= -1; comparisonIndex-- {
-			if comparisonIndex == -1{
-				array[gapIndex] = currentValue
-			}else if array[comparisonIndex] > currentValue{
+		for gapIndex >= 1{
+			comparisonIndex := gapIndex - 1
+			if array[comparisonIndex] > currentValue {
 				array[gapIndex] = array[comparisonIndex]
-				gapIndex = comparisonIndex
-			}else{
-				array[gapIndex] = currentValue
+				gapIndex--
+			} else {
 				break
 			}
 		}
+		array[gapIndex] = currentValue  //Taking this out of the nested loop is the key.
 		currentStartIndex++
 	}
+
+
 }
 
 func main() {
