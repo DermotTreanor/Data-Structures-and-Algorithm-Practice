@@ -28,6 +28,6 @@ func binarySearch(array []int, value int)(presence bool, index int){
 }
 
 func main() {
-	g, h := binarySearch(orderedArray, 2)
-	fmt.Println(g, h)
+	inArray, index := binarySearch(orderedArray, 25)
+	fmt.Println(inArray, index)
 }
