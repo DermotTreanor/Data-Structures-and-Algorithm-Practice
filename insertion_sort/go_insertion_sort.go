@@ -46,7 +46,7 @@ func InsertionSort(array []int) {
 	// }
 
 
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Inbetween previous implementation and next implementation
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~We realised we only need to fill the gap in the outer loop
 	// for currentStartIndex < len(array) {
 	// 	gapIndex = currentStartIndex
 	// 	currentValue = array[gapIndex]
@@ -63,14 +63,31 @@ func InsertionSort(array []int) {
 	// }
 
 
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Current, cleanest attempt
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~The loop is built around gapIndex
+	// for currentStartIndex < len(array) {
+	// 	gapIndex = currentStartIndex
+	// 	currentValue = array[gapIndex]
+	// 	for gapIndex >= 1{
+	// 		comparisonIndex := gapIndex - 1
+	// 		if array[comparisonIndex] > currentValue {
+	// 			array[gapIndex] = array[comparisonIndex]
+	// 			gapIndex--
+	// 		} else {
+	// 			break
+	// 		}
+	// 	}
+	// 	array[gapIndex] = currentValue  //Taking this out of the nested loop is the key.
+	// 	currentStartIndex++
+	// }
+
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~We can remove comparisonIndex completely and just 
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~reference that index as 'gapIndex - 1' (it's only needed twice)
 	for currentStartIndex < len(array) {
 		gapIndex = currentStartIndex
 		currentValue = array[gapIndex]
 		for gapIndex >= 1{
-			comparisonIndex := gapIndex - 1
-			if array[comparisonIndex] > currentValue {
-				array[gapIndex] = array[comparisonIndex]
+			if array[gapIndex - 1] > currentValue {
+				array[gapIndex] = array[gapIndex - 1]
 				gapIndex--
 			} else {
 				break
@@ -79,6 +96,7 @@ func InsertionSort(array []int) {
 		array[gapIndex] = currentValue  //Taking this out of the nested loop is the key.
 		currentStartIndex++
 	}
+
 
 
 }
