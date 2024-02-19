@@ -17,6 +17,8 @@ func (s *stack) pop() (v interface{}) {
 		v = s.entities[len(s.entities)-1]
 		s.entities = s.entities[:len(s.entities)-1]
 	}
+	//Should probably handle the situation better if the stack is empty.
+	//May need to modify this whole thing to also return an error.
 	return v
 }
 
