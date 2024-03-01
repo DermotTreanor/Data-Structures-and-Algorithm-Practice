@@ -1,7 +1,3 @@
-import sys, os, time
-file = open("./heart", "w")
-sys.stdout = file
-
 def anagrams(word):
     if len(word) == 1:
         return [word]
@@ -13,6 +9,4 @@ def anagrams(word):
 
 
 for i in anagrams("abcd"):
-    time.sleep(1)
-    os.system("truncate -s 0 ./heart")
-    print(i, flush=True)
+    print(i)
