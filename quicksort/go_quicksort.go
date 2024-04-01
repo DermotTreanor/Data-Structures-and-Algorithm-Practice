@@ -45,6 +45,9 @@ func (p_array *PartitionableArray) Partition(lower_ind int, upper_ind int) (sort
 			upper_ind--
 		}
 		if lower_ind >= upper_ind{
+			//Lower index is important because we chose the pivot to be the furthest right. So, lower will always stop as it will eventually 
+			//land on the pviot which can't be less than itself (this is why it's important to not run the lower_ind loop as less than OR EQUAL as we might skip it).
+			//If we do end on the pivot we will just be swapping it with itself.
 			p_array.array[lower_ind], p_array.array[pivot_index] = p_array.array[pivot_index], p_array.array[lower_ind]
 			break
 		} else{
