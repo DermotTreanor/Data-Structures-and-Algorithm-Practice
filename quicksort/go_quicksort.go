@@ -57,7 +57,18 @@ func (p_array *PartitionableArray) Partition(lower_ind int, upper_ind int) (sort
 }
 
 func (p_array *PartitionableArray)Quicksort(left_pointer int, right_pointer int){
-	if (right_pointer - left_pointer) < 1{
+	/*THOUGHTS ON BASE CASE:
+	  I believe that the base case should be when our pointers have gone past each other.
+	  This means the array to sort is empty and we will get a negative number, so we can return. 
+	  
+	  If we have just one item then the subtraction will give us 0. 
+	  It doesn't matter if we include this in our base case or not because if we don't, we will just be sorting an array of one item.
+	  That won't cause any harm but it's pointless so we may as well return. 
+
+	  In other words, we definitely need to exit if we subtract the pointers and get a negative. But we will also exit if the value is 0 because
+	  we would be doing an unnecessary partition.
+	*/
+	if (right_pointer - left_pointer) <= 0{
 		return
 	}
 	partition_index := p_array.Partition(left_pointer, right_pointer)
