@@ -21,7 +21,7 @@ func get_mixed_array() (mixed []int) {
 	return mixed
 }
 
-type PartionableArray struct {
+type PartitionableArray struct {
 	array []int
 }
 
@@ -33,26 +33,20 @@ If this were an array then we would HAVE to do this because passing in a copy of
 As it stands, whether we pass in a copy of our object only affects whether we are copying the reference of a slice.
 But the reference will still point to the same data whether it is a copy or not.
 */
-func (p_array *PartionableArray) Partition() {
-	temp_index := len(p_array.array) - 1
-	temp_value := p_array.array[len(p_array.array) - 1]
+func (p_array *PartitionableArray) Partition() {
+	pivot_index := len(p_array.array) - 1
+	pivot_value := p_array.array[len(p_array.array) - 1]
 	lower_ind := 0
 	upper_ind := len(p_array.array) - 2
 	for{
-		for lower_ind < len(p_array.array) - 1{
-			if p_array.array[lower_ind] >= temp_value{
-				break
-			}
+		for lower_ind < len(p_array.array) - 1 && !(p_array.array[lower_ind] >= pivot_value){
 			lower_ind++
 		}
-		for upper_ind >= 0{
-			if p_array.array[upper_ind] <= temp_value{
-				break
-			}
+		for upper_ind >= 0 && !(p_array.array[upper_ind] <= pivot_value){
 			upper_ind--
 		}
 		if lower_ind >= upper_ind{
-			p_array.array[lower_ind], p_array.array[temp_index] = p_array.array[temp_index], p_array.array[lower_ind]
+			p_array.array[lower_ind], p_array.array[pivot_index] = p_array.array[pivot_index], p_array.array[lower_ind]
 			break
 		} else{
 			p_array.array[lower_ind], p_array.array[upper_ind] = p_array.array[upper_ind], p_array.array[lower_ind]
@@ -60,8 +54,13 @@ func (p_array *PartionableArray) Partition() {
 	}
 }
 
+func (p_array *PartitionableArray)Quicksort(){
+	return
+}
+
+
 func main() {
-	test_array := PartionableArray{
+	test_array := PartitionableArray{
 		array: get_mixed_array(),
 	}
 	fmt.Println(test_array.array)
