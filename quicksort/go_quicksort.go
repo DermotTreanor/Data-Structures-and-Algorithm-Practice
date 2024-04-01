@@ -33,11 +33,16 @@ If this were an array then we would HAVE to do this because passing in a copy of
 As it stands, whether we pass in a copy of our object only affects whether we are copying the reference of a slice.
 But the reference will still point to the same data whether it is a copy or not.
 */
-func (p_array *PartitionableArray) Partition() {
-	pivot_index := len(p_array.array) - 1
-	pivot_value := p_array.array[len(p_array.array) - 1]
-	lower_ind := 0
-	upper_ind := len(p_array.array) - 2
+func (p_array *PartitionableArray) Partition(lower_ind int, upper_ind int) {
+	if (upper_ind - lower_ind) < 1{
+		return
+	}
+
+	original_upper := upper_ind
+	original_lower := lower_ind
+	pivot_index := upper_ind
+	pivot_value := p_array.array[pivot_index]
+	upper_ind -= 1
 	for{
 		for lower_ind < len(p_array.array) - 1 && !(p_array.array[lower_ind] >= pivot_value){
 			lower_ind++
@@ -52,9 +57,14 @@ func (p_array *PartitionableArray) Partition() {
 			p_array.array[lower_ind], p_array.array[upper_ind] = p_array.array[upper_ind], p_array.array[lower_ind]
 		}
 	}
+
+	p_array.Partition(original_lower, lower_ind - 1)
+	p_array.Partition(lower_ind + 1, original_upper)
+
 }
 
 func (p_array *PartitionableArray)Quicksort(){
+	p_array.Partition(0, len(p_array.array))
 	return
 }
 
@@ -64,7 +74,7 @@ func main() {
 		array: get_mixed_array(),
 	}
 	fmt.Println(test_array.array)
-	test_array.Partition()
+	test_array.Partition(0, len(test_array.array) - 1)
 	fmt.Println(test_array.array)
 
 	return
